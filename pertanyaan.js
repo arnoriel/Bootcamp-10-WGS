@@ -35,6 +35,7 @@ const askAddress = () => {
     rl.question('Dimana Alamatmu? ', (alamat) => {
         userData.alamat = alamat;
         const result = `Namamu adalah ${userData.nama}, Emailmu adalah ${userData.email}, nomor teleponmu adalah ${userData.phone}, alamatmu di ${userData.alamat}`;
+        console.log('\nInformasi Lengkap');
         console.log(result);
         fs.writeFileSync('test.txt', result);
         rl.close();
