@@ -40,6 +40,14 @@ const saveContacts = async (contacts) => {
 // Fungsi untuk menambahkan kontak baru
 const addContact = async (name, email, mobile) => {
   await ensureContactsFile(); // Memastikan file kontak ada
+  let contacts = await loadContacts(); // Memuat kontak yang ada
+
+  // Cek apakah kontak dengan nama yang sama sudah ada
+  if (contacts.some(contact => contact.name === name)) {
+    console.log('Kontak dengan nama ini sudah ada. Silakan gunakan nama lain.'); // Mencetak pesan jika nama sudah ada
+    return; // Menghentikan eksekusi jika nama sudah ada
+  }
+
   const contact = { name, email, mobile }; // Membuat objek kontak baru
 
   // Validasi email jika diberikan
@@ -54,7 +62,6 @@ const addContact = async (name, email, mobile) => {
     return; // Menghentikan eksekusi jika nomor telepon tidak valid
   }
 
-  let contacts = await loadContacts(); // Memuat kontak yang ada
   contacts.push(contact); // Menambahkan kontak baru ke array kontak
   await saveContacts(contacts); // Menyimpan array kontak yang diperbarui
   console.log('Kontak berhasil ditambahkan!'); // Mencetak pesan sukses
@@ -186,6 +193,7 @@ yargs.command({
 });
 
 yargs.parse(); // Mem-parsing input yargs
+
 
 
 // ---Day 3--- //
