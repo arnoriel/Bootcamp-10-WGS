@@ -1,20 +1,27 @@
 [
   {
-    "nama": "Azril",
-    "email": "azrilluthfimulyadi@gmail.com",
-    "phone": "085797009915",
-    "alamat": "pasirkoja"
+    "name": "azril",
+    "email": "cellestinocasso20@gmail.com",
+    "mobile": "08987654321"
   },
   {
-    "nama": "Azril",
-    "email": "azrilluthfimulyadi@gmail.com",
-    "phone": "085797009915",
-    "alamat": "bandung"
+    "name": "jamal",
+    "email": "jamaludin@gmail.com",
+    "mobile": "0822712361831"
   },
   {
-    "nama": "qwe",
-    "email": "qwe@gmail.com",
-    "phone": "085127216378123",
-    "alamat": "paruan"
+    "name": "yanto murka",
+    "email": "yantoludin@gmail.com",
+    "mobile": "085523472384"
+  },
+  {
+    "name": "Budi",
+    "email": "budi@example.com",
+    "mobile": "081234567890"
+  },
+  {
+    "name": "Hilal",
+    "email": "hilal@gmail.com",
+    "mobile": "08226723452734"
   }
 ]
