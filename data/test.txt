@@ -1,1 +1,12 @@
-This is the new content of the test file.
+app.get('/test', (req, res) => {
+    const testPath = path.join(__dirname, 'data', 'test.txt');
+    
+    fs.readFile(testPath, 'utf8', (err, data) => {
+        if (err) {
+            console.error('Error reading test file:', err);
+            return res.status(500).send('Error reading test file');
+        }
+
+        res.send(data);
+    });
+});
