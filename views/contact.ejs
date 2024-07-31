@@ -1,22 +1,75 @@
-<h2 class="mt-4">Contact List</h2>
-
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th scope="col">No</th>
-            <th scope="col">Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Mobile</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% contacts.forEach((contact, index) => { %>
-            <tr>
-                <th scope="row"><%= index + 1 %></th>
-                <td><%= contact.name %></td>
-                <td><%= contact.email %></td>
-                <td><%= contact.mobile %></td>
-            </tr>
-        <% }) %>
-    </tbody>
-</table>
+<a href="/" style="text-decoration: none; color: black;">Home</a> > Contact
+<div class="container">
+    <h2 class="mt-4"><b>Contacts</b></h2>
+    <br>
+    <a href="/contact/add" class="btn btn-success mb-3"><i class="bi bi-plus-circle"></i> Add Contact</a>
+    
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-lg-8">
+                   <p><b>Contact List</b> | All Contacts (<%= totalContacts %>)</p>
+                </div>
+                <div class="col">
+                    <form action="/contact" method="get" class="mb-1" style="max-width: 400px;">
+                        <div class="input-group">
+                            <input type="text" name="search" class="form-control" placeholder="Search contacts" value="<%= searchQuery %>">
+                            <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-search"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% contacts.forEach((contact, index) => { %>
+                    <tr>
+                        <th scope="row"><%= (currentPage - 1) * 5 + index + 1 %></th>
+                        <td><%= contact.name %></td>
+                        <td><%= contact.email %></td>
+                        <td>
+                            <a href="/contact/detail/<%= contact.name %>" class="btn btn-info"><i class="bi bi-eye"></i> View</a>
+                            <a href="/contact/edit/<%= contact.name %>" class="btn btn-warning"><i class="bi bi-pencil-square"></i> Edit</a>
+                            <form action="/contact/delete" method="post" style="display:inline;">
+                                <input type="hidden" name="name" value="<%= contact.name %>">
+                                <button type="submit" class="btn btn-danger"> <i class="bi bi-trash"></i> Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                <% if (currentPage > 1) { %>
+                    <li class="page-item">
+                        <a class="page-link" href="/contact?page=<%= currentPage - 1 %>&search=<%= searchQuery %>" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                <% } %>
+                <% for (let i = 1; i <= totalPages; i++) { %>
+                    <li class="page-item <%= i === currentPage ? 'active' : '' %>">
+                        <a class="page-link" href="/contact?page=<%= i %>&search=<%= searchQuery %>"><%= i %></a>
+                    </li>
+                <% } %>
+                <% if (currentPage < totalPages) { %>
+                    <li class="page-item">
+                        <a class="page-link" href="/contact?page=<%= currentPage + 1 %>&search=<%= searchQuery %>" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                <% } %>
+            </ul>
+        </nav>
+    </div>
+</div>
