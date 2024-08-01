@@ -118,13 +118,18 @@ app.post('/contact/add', validateMobile, (req, res) => {
 
         try {
             const contacts = JSON.parse(data);
-            // Memeriksa apakah nama sudah ada
-            const existingContact = contacts.find(contact => contact.name === req.body.name);
+            // Memeriksa apakah nama, email, atau nomor telepon sudah ada
+            const existingContact = contacts.find(contact => 
+                contact.name === req.body.name || 
+                contact.email === req.body.email || 
+                contact.mobile === req.body.mobile
+            );
             if (existingContact) {
+                let errorMessage = 'Nama, email, atau nomor telepon sudah ada, silahkan masukkan data lain';
                 return res.render('add', {
                     title: 'Add Contact',
                     layout: 'layouts/main',
-                    errorMessage: 'Nama sudah ada, silahkan masukkan nama lain',
+                    errorMessage,
                     name: req.body.name,
                     email: req.body.email,
                     mobile: req.body.mobile
@@ -151,6 +156,7 @@ app.post('/contact/add', validateMobile, (req, res) => {
     });
 });
 
+
 // Rute untuk halaman edit kontak
 app.get('/contact/edit/:name', (req, res) => {
     const contactsPath = path.join(__dirname, 'data', 'contacts.json');
@@ -166,7 +172,12 @@ app.get('/contact/edit/:name', (req, res) => {
             if (!contact) {
                 return res.status(404).send('Contact not found');
             }
-            res.render('edit', { title: 'Edit Contact', layout: 'layouts/main', contact });
+            res.render('edit', { 
+                title: 'Edit Contact', 
+                layout: 'layouts/main', 
+                contact,
+                oldName: contact.name // Pass oldName for use in the form
+            });
         } catch (parseErr) {
             console.error('Error parsing JSON:', parseErr);
             return res.status(500).send('Error parsing contacts data');
@@ -174,6 +185,7 @@ app.get('/contact/edit/:name', (req, res) => {
     });
 });
 
+// Rute untuk memperbarui kontak
 // Rute untuk memperbarui kontak
 app.post('/contact/edit', validateMobile, (req, res) => {
     const errors = validationResult(req);
@@ -187,7 +199,8 @@ app.post('/contact/edit', validateMobile, (req, res) => {
                 name: req.body.name,
                 email: req.body.email,
                 mobile: req.body.mobile
-            }
+            },
+            oldName: req.body.oldName // Keep oldName for the form
         });
     }
 
@@ -204,6 +217,27 @@ app.post('/contact/edit', validateMobile, (req, res) => {
             if (index === -1) {
                 return res.status(404).send('Contact not found');
             }
+
+            // Memeriksa apakah email atau nomor telepon sudah ada pada kontak lain
+            const duplicateContact = contacts.find(contact => 
+                (contact.email === req.body.email || contact.mobile === req.body.mobile) &&
+                contact.name !== req.body.oldName
+            );
+            if (duplicateContact) {
+                let errorMessage = 'Email atau nomor telepon sudah ada, silahkan masukkan data lain';
+                return res.render('edit', {
+                    title: 'Edit Contact',
+                    layout: 'layouts/main',
+                    errorMessage,
+                    contact: {
+                        name: req.body.name,
+                        email: req.body.email,
+                        mobile: req.body.mobile
+                    },
+                    oldName: req.body.oldName
+                });
+            }
+
             contacts[index] = {
                 name: req.body.name,
                 email: req.body.email,
@@ -214,7 +248,7 @@ app.post('/contact/edit', validateMobile, (req, res) => {
                     console.error('Error writing contacts file:', err);
                     return res.status(500).send('Error writing contacts file');
                 }
-                res.redirect('/contact'); // Redirect ke halaman kontak
+                res.redirect('/contact'); // Redirect to contact list
             });
         } catch (parseErr) {
             console.error('Error parsing JSON:', parseErr);
@@ -222,6 +256,8 @@ app.post('/contact/edit', validateMobile, (req, res) => {
         }
     });
 });
+
+
 
 // Rute untuk menghapus kontak
 app.post('/contact/delete', (req, res) => {
