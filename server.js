@@ -30,14 +30,14 @@ const validateMobile = [
 
 // Rute untuk halaman utama
 app.get('/', (req, res) => {
-    res.render('home', { nama: 'Arno', title: 'Home', layout: 'layouts/main' });
+    res.render('home', { nama: 'Arno', title: 'Home', layout: 'layouts/alternate' });
 });
 
 // Rute untuk halaman about
 app.get('/about', (req, res) => {
     res.render('about', {
         title: 'About',
-        layout: 'layouts/main',
+        layout: 'layouts/alternate',
         nama: 'Azril Lutfhi Mulyadi',
         panggilan: 'Arno',
         tempat: 'Pasirkoja, Bandung.'
@@ -76,7 +76,7 @@ app.get('/contact', (req, res) => {
             res.render('contact', {
                 contacts: paginatedContacts,
                 title: 'Contact',
-                layout: 'layouts/main',
+                layout: 'layouts/alternate',
                 searchQuery,
                 currentPage: page,
                 totalPages,
@@ -91,7 +91,7 @@ app.get('/contact', (req, res) => {
 
 // Rute untuk halaman tambah kontak
 app.get('/contact/add', (req, res) => {
-    res.render('add', { title: 'Add Contact', layout: 'layouts/main', errorMessage: null, name: '', email: '', mobile: '' });
+    res.render('add', { title: 'Add Contact', layout: 'layouts/alternate', errorMessage: null, name: '', email: '', mobile: '' });
 });
 
 // Rute untuk menambahkan kontak
@@ -101,7 +101,7 @@ app.post('/contact/add', validateMobile, (req, res) => {
         const errorMessage = errors.array().map(error => error.msg).join(', ');
         return res.render('add', {
             title: 'Add Contact',
-            layout: 'layouts/main',
+            layout: 'layouts/alternate',
             errorMessage,
             name: req.body.name,
             email: req.body.email,
@@ -128,7 +128,7 @@ app.post('/contact/add', validateMobile, (req, res) => {
                 let errorMessage = 'Nama, email, atau nomor telepon sudah ada, silahkan masukkan data lain';
                 return res.render('add', {
                     title: 'Add Contact',
-                    layout: 'layouts/main',
+                    layout: 'layouts/alternate',
                     errorMessage,
                     name: req.body.name,
                     email: req.body.email,
@@ -174,7 +174,7 @@ app.get('/contact/edit/:name', (req, res) => {
             }
             res.render('edit', { 
                 title: 'Edit Contact', 
-                layout: 'layouts/main', 
+                layout: 'layouts/alternate', 
                 contact,
                 oldName: contact.name // Pass oldName for use in the form
             });
@@ -193,7 +193,7 @@ app.post('/contact/edit', validateMobile, (req, res) => {
         const errorMessage = errors.array().map(error => error.msg).join(', ');
         return res.render('edit', {
             title: 'Edit Contact',
-            layout: 'layouts/main',
+            layout: 'layouts/alternate',
             errorMessage,
             contact: {
                 name: req.body.name,
@@ -227,7 +227,7 @@ app.post('/contact/edit', validateMobile, (req, res) => {
                 let errorMessage = 'Email atau nomor telepon sudah ada, silahkan masukkan data lain';
                 return res.render('edit', {
                     title: 'Edit Contact',
-                    layout: 'layouts/main',
+                    layout: 'layouts/alternate',
                     errorMessage,
                     contact: {
                         name: req.body.name,
@@ -300,7 +300,7 @@ app.get('/contact/detail/:name', (req, res) => {
             if (!contact) {
                 return res.status(404).send('Contact not found'); // Kontak tidak ditemukan
             }
-            res.render('detail', { title: 'Contact Detail', layout: 'layouts/main', contact });
+            res.render('detail', { title: 'Contact Detail', layout: 'layouts/alternate', contact });
         } catch (parseErr) {
             console.error('Error parsing JSON:', parseErr);
             return res.status(500).send('Error parsing contacts data');
@@ -310,7 +310,7 @@ app.get('/contact/detail/:name', (req, res) => {
 
 // Middleware untuk menangani halaman 404
 app.use((req, res, next) => {
-    res.status(404).render('404', { title: '404', layout: 'layouts/main' });
+    res.status(404).render('404', { title: '404', layout: 'layouts/alternate' });
 });
 
 app.listen(port, () => {
