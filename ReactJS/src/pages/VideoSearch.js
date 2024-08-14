@@ -10,7 +10,7 @@ const VideoSearch = () => {
 
   const popupRef = useRef(null);
 
-  const API_KEY = 'AIzaSyAqOMY68_Uq5hScNeWcLYk1wSxjwr7JhuM';
+  const API_KEY = 'YourKEy';
 
   const handleSearch = async (e) => {
     e.preventDefault();

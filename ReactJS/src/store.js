@@ -24,6 +24,7 @@ const store = configureStore({
   reducer: {
     counter: counterSlice.reducer,
   },
+  devTools: process.env.NODE_ENV !== 'production', // Aktifkan Redux DevTools
 });
 
 export default store;

@@ -1,0 +1,71 @@
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Menyelaraskan card ke atas, bukan ke tengah */
+    padding-top: 50px; /* Menambahkan padding atas agar tidak terlalu menempel pada header */
+    height: 100vh;
+    background-color: #f5f5f5;
+  }
+  
+  .card {
+    width: 350px;
+    max-height: 80vh; /* Menambahkan max-height agar card tidak terlalu panjang */
+    padding: 15px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow-y: auto; /* Menambahkan scroll jika konten terlalu panjang */
+  }
+  
+  .card-body label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+  }
+  
+  .card-body input[type="text"],
+  .card-body input[type="email"],
+  .card-body input[type="checkbox"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .card-body div {
+    margin-bottom: 10px;
+  }
+  
+  .card-body div label {
+    display: inline-block;
+    width: auto;
+    margin-right: 10px;
+  }
+  
+  button {
+    width: 100%;
+    padding: 8px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  h3 {
+    font-size: 14px;
+    margin-top: 15px;
+  }
+  
+  pre {
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 12px;
+  }
+  

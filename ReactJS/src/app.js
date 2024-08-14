@@ -15,6 +15,7 @@ import VideoSearch from './pages/VideoSearch';
 import VideoClass from './pages/VideoClass';
 import Hooks from './Hooks';
 import ReduxPage from './pages/Redux';
+import EmployeeForm from './pages/EmployeeForm';
 
 class App extends Component {
     render() {
@@ -35,6 +36,7 @@ class App extends Component {
                     <Route path="/videoclass" element={<VideoClass />} />
                     <Route path="/hooks" element={<Hooks />} />
                     <Route path="/redux" element={<ReduxPage />} />
+                    <Route path="/employeeform" element={<EmployeeForm />} />
                 </Routes>
             </Router>
         );
