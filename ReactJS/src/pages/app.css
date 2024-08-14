@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+.img {
+    width: 300px;
+}
+
+.font{
+    font-family: 'Roboto', sans-serif;  /* Gunakan font Roboto */
+}
+/* Container for the card */
+.card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Card styling */
+.card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Image styling */
+.card-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Content inside the card */
+.card-content {
+    padding: 15px;
+}
+
+/* Title of the card */
+.card-title {
+    font-size: 1.5em;
+    margin: 0;
+    padding-bottom: 10px;
+}
+
+/* Text inside the card */
+.card-text {
+    font-size: 1em;
+    margin: 0;
+    padding-bottom: 15px;
+    color: #555;
+}
+
+/* Button inside the card */
+.card-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.card-button:hover {
+    background-color: #0056b3;
+}
+
+/* Add hover effect to the card */
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+

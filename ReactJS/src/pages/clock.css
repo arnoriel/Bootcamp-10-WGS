@@ -1,0 +1,19 @@
+.clock-page {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 300px;
+    margin: 50px auto;
+}
+
+.clock-page h1 {
+    color: #343a40;
+}
+
+.clock-page p {
+    font-size: 24px;
+    color: #495057;
+}

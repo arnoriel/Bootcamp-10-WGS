@@ -1,0 +1,59 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+        <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
+        <li class="breadcrumb-item text-sm text-dark active" aria-current="page"><%= title %></li>
+    </ol>
+    <h6 class="font-weight-bolder mb-0"><%= title %></h6>
+</nav>
+<div class="container">
+    <h1 class="mt-4"><%= title %></h1>
+    <div class="mb-3">
+        <a href="/contact/add" class="btn btn-primary">Add New Contact</a>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <table id="contactsTable" class="display table table-hover" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% contacts.forEach((contact, index) => { %>
+                    <tr>
+                        <td><%= index + 1 %></td>
+                        <td><%= contact.name %></td>
+                        <td><%= contact.email %></td>
+                        <td>
+                            <a href="/contact/detail/<%= contact.name %>" class="btn btn-info btn-sm">Detail</a>
+                            <a href="/contact/edit/<%= contact.name %>" class="btn btn-warning btn-sm">Edit</a>
+                            <form action="/contact/delete" method="POST" class="d-inline">
+                                <input type="hidden" name="name" value="<%= contact.name %>">
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#contactsTable').DataTable({
+            "pagingType": "simple_numbers"
+        });
+    });
+
+    document.getElementById('searchButton').addEventListener('click', function() {
+        const searchInput = document.getElementById('searchInput').value;
+        window.location.href = `/contact?search=${encodeURIComponent(searchInput)}`;
+    });
+</script>

@@ -1,0 +1,173 @@
+.video-search {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+}
+
+.search-form {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Ini memastikan tombol search sejajar dengan input field */
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.search-form input {
+    width: 70%;
+    padding: 10px;
+    font-size: 16px;
+    margin-right: 10px; /* Tambahkan margin agar ada ruang antara input dan tombol */
+}
+
+.search-form button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.search-history-popup {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(5px); /* Menggeser ke tengah dan sedikit ke bawah */
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    width: 70%;
+    padding: 10px;
+}
+
+.search-history-popup h4 {
+    margin-top: 0;
+    font-size: 16px;
+}
+
+.search-history-popup ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+}
+
+.search-history-popup li {
+    padding: 5px 0;
+    cursor: pointer;
+}
+
+.search-history-popup li:hover {
+    background-color: #f1f1f1;
+}
+
+.search-history-popup button {
+    display: block;
+    margin: 0 auto;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.video-content {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* Other existing CSS remains the same */
+
+
+.video-display {
+    flex: 2;
+    margin-right: 20px;
+}
+
+.video-display iframe {
+    width: 100%;
+    height: 450px;
+    border-radius: 8px;
+}
+
+.video-display h3 {
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+.video-display p {
+    margin-top: 5px;
+    color: #666;
+}
+
+.video-list {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.video-item {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+}
+
+.video-item img {
+    width: 120px;
+    height: 90px;
+    display: block;
+    border-radius: 8px;
+    margin-right: 10px;
+}
+
+.video-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.video-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.video-channel {
+    font-size: 12px;
+    color: #666;
+}
+
+.video-item:hover {
+    transform: scale(1.05);
+    background-color: #f1f1f1;
+}
+
+.history-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    position: relative;  /* Tambahkan posisi relative pada parent */
+  }
+  
+  .remove-history-btn {
+    background: none;
+    border: none;
+    color: #999;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 10px;
+    position: absolute;
+    right: 0;  /* Posisi absolut ke ujung kanan */
+  }
+  
+  .remove-history-btn:hover {
+    color: #333;
+  }
+  
+  

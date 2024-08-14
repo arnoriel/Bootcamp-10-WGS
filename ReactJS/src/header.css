@@ -1,0 +1,113 @@
+/* Mengimpor font dari Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f8f9fa;
+}
+
+.header-title {
+    font-size: 24px;
+    font-family: 'Roboto', sans-serif;  /* Gunakan font Roboto */
+}
+
+.header-nav {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.nav-link {
+    color: black;  /* Mengubah warna teks menjadi hitam */
+    text-decoration: none;  /* Menghilangkan garis bawah */
+    font-size: 14px;  /* Mengatur ukuran teks menjadi kecil */
+    font-family: 'Roboto', sans-serif;  /* Gunakan font Roboto */
+}
+
+.nav-link:hover {
+    color: #007bff; /* Menambahkan efek hover, opsional */
+}
+
+/* Styling untuk dropdown */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-toggle {
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 14px;
+    padding: 10px;
+    color: black;
+    font-family: 'Roboto', sans-serif;  /* Gunakan font Roboto */
+    text-decoration: none;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    min-width: 160px;
+    z-index: 1000;
+}
+
+.dropdown-item {
+    display: block;
+    padding: 10px;
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;  /* Gunakan font Roboto */
+}
+
+.dropdown-item:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown2 {
+    position: relative;
+}
+
+.dropdown2-toggle {
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 14px;
+    padding: 10px;
+    color: black;
+    font-family: 'Roboto', sans-serif;  /* Gunakan font Roboto */
+    text-decoration: none;
+}
+
+.dropdown2-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    min-width: 160px;
+    z-index: 1000;
+}
+
+.dropdown2-item {
+    display: block;
+    padding: 10px;
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;  /* Gunakan font Roboto */
+}
+
+.dropdown2-item:hover {
+    background-color: #f1f1f1;
+}
