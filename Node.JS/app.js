@@ -2,6 +2,12 @@ const fs = require('fs').promises; // Mengimpor modul fs dengan API promises unt
 const yargs = require('yargs'); // Mengimpor modul yargs untuk menangani argumen baris perintah
 const validator = require('validator'); // Mengimpor modul validator untuk validasi email dan nomor telepon
 const path = './data/contacts.json'; // Mendefinisikan path ke file contacts.json
+const cors = require('cors');
+const bodyParser = require('body-parser')
+
+// Middleware
+app.use(cors()); // Enable CORS
+app.use(bodyParser.json()); // Parse JSON request bodies
 
 // Fungsi untuk memastikan file kontak ada dan membuatnya jika belum ada
 const ensureContactsFile = async () => {

@@ -31,6 +31,7 @@ export default function Header() {
                             <Link to="/videoclass" className="dropdown-item">VideoClass</Link>
                             <Link to="/redux" className="dropdown-item">Redux Counter</Link>
                             <Link to="/employeeform" className="dropdown-item">EmployeeForm</Link>
+                            <Link to="/contactsapi" className="dropdown-item">Contacts API</Link>
                         </div>
                     )}
                 </div>

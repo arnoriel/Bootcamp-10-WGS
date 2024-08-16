@@ -6,9 +6,18 @@ const expressLayouts = require('express-ejs-layouts');
 const bodyParser = require('body-parser'); 
 const { body, validationResult } = require('express-validator'); 
 const pool = require('./db'); 
+const cors = require('cors');
 
 const app = express(); 
 const port = 3000; 
+
+app.use(cors({
+    origin: 'http://localhost:3001', // URL frontend kamu
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // metode HTTP yang diizinkan
+    allowedHeaders: ['Content-Type', 'Authorization'], // header yang diizinkan
+}));
+
+app.use(express.json()); // pastikan ini sudah ada
 
 app.use(bodyParser.urlencoded({ extended: false })); 
 
@@ -227,6 +236,85 @@ app.get('/contact/detail/:name', (req, res) => {
 
         const contact = result.rows[0];
         res.render('detail', { title: 'Contact Detail', layout: 'layouts/alternate', contact });
+    });
+});
+
+app.get('/api/contacts', (req, res) => {
+    pool.query('SELECT * FROM contacts ORDER BY updated_at DESC', (err, result) => {
+        if (err) {
+            console.error('Error fetching contacts from database:', err);
+            return res.status(500).json({ error: 'Error fetching contacts from database' });
+        }
+        res.json(result.rows);
+    });
+});
+
+app.post('/api/contacts', validateMobile, (req, res) => {
+    console.log('Request body:', req.body); // Log data yang diterima
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { name, email, mobile } = req.body;
+    pool.query('INSERT INTO contacts (name, email, mobile) VALUES ($1, $2, $3)', [name, email, mobile], (err) => {
+        if (err) {
+            console.error('Error adding contact to database:', err);
+            return res.status(500).json({ error: 'Error adding contact to database' });
+        }
+        res.status(201).json({ message: 'Contact added successfully' });
+    });
+});
+
+
+app.put('/api/contacts/:name', validateMobile, (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { name, email, mobile } = req.body;
+    const oldName = req.params.name;
+
+    // Pastikan tidak ada email atau nomor telepon yang bentrok dengan kontak lain
+    pool.query(
+        'SELECT * FROM contacts WHERE (email = $1 OR mobile = $2) AND name != $3',
+        [email, mobile, oldName],
+        (err, result) => {
+            if (err) {
+                console.error('Error checking existing contacts:', err);
+                return res.status(500).json({ error: 'Error checking existing contacts' });
+            }
+
+            if (result.rows.length > 0) {
+                return res.status(400).json({ error: 'Email or mobile already in use' });
+            }
+
+            // Update kontak
+            pool.query(
+                'UPDATE contacts SET name = $1, email = $2, mobile = $3, updated_at = CURRENT_TIMESTAMP WHERE name = $4',
+                [name, email, mobile, oldName],
+                (err) => {
+                    if (err) {
+                        console.error('Error updating contact in database:', err);
+                        return res.status(500).json({ error: 'Error updating contact in database' });
+                    }
+                    res.json({ message: 'Contact updated successfully' });
+                }
+            );
+        }
+    );
+});
+
+app.delete('/api/contacts/:id', (req, res) => {
+    const id = req.params.id;
+    pool.query('DELETE FROM contacts WHERE id = $1', [id], (err) => {
+        if (err) {
+            console.error('Error deleting contact from database:', err);
+            return res.status(500).json({ error: 'Error deleting contact from database' });
+        }
+        res.json({ message: 'Contact deleted successfully' });
     });
 });
 
